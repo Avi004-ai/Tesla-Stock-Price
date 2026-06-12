@@ -6,9 +6,7 @@ import matplotlib.pyplot as plt
 from keras.models import load_model
 from sklearn.preprocessing import MinMaxScaler
 
-# -----------------------------------
-# Page Config
-# -----------------------------------
+
 
 st.set_page_config(
     page_title="Tesla Stock Predictor",
@@ -18,15 +16,11 @@ st.set_page_config(
 st.title("Tesla Stock Price Prediction")
 st.write("LSTM-based Tesla Stock Forecasting")
 
-# -----------------------------------
-# Load Model
-# -----------------------------------
+
 
 model = load_model("tesla_lstm_model.keras")
 
-# -----------------------------------
-# Upload CSV
-# -----------------------------------
+
 
 uploaded_file = st.file_uploader(
     "Upload Tesla Dataset",
@@ -40,9 +34,7 @@ if uploaded_file is not None:
     st.subheader("Dataset Preview")
     st.dataframe(df.head())
 
-    # -------------------------------
-    # Preprocessing
-    # -------------------------------
+
 
     data = df[['Close']]
 
@@ -50,18 +42,14 @@ if uploaded_file is not None:
 
     scaled_data = scaler.fit_transform(data)
 
-    # -------------------------------
-    # Prediction Days
-    # -------------------------------
+
 
     days = st.selectbox(
         "Select Forecast Days",
         [1, 5, 10]
     )
 
-    # -------------------------------
-    # Forecast Button
-    # -------------------------------
+
 
     if st.button("Predict"):
 
@@ -97,9 +85,6 @@ if uploaded_file is not None:
 
         st.dataframe(pred_df)
 
-        # ---------------------------
-        # Plot Forecast
-        # ---------------------------
 
         fig, ax = plt.subplots(figsize=(8, 4))
 
